@@ -1,7 +1,7 @@
 <template>
     <div class="search_bar flex items-center gap-4">
-        <input type="text" v-model="searchInput">
-        <button @click="fetchPokemon()" class="bg-white flex justify-center items-center">
+        <input type="text" v-model="store.searchInput">
+        <button @click="$emit('searchPokemon')" class="bg-white flex justify-center items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -12,27 +12,13 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { store } from '../store'
 export default {
     data() {
         return {
-            pokemon: [],
-            searchInput: ''
+            store,
         }
     },
-    methods: {
-        fetchPokemon() {
-            axios
-                .get(`https://pokeapi.co/api/v2/pokemon/${this.searchInput}/`)
-                .then(res => {
-                    console.log(res.data)
-                })
-        }
-    },
-    created() {
-        this.fetchPokemon()
-    }
-
 }
 </script>
 
