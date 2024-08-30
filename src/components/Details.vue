@@ -27,13 +27,19 @@
 </template>
 
 <script>
+import { store } from '../store'
 export default {
     props: {
         pokemon: {
             type: Object,
             required: true
         }
-    }
+    },
+    data() {
+        return {
+            store,
+        }
+    },
 
 }
 </script>

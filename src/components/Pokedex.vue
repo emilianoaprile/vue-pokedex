@@ -1,13 +1,13 @@
 <template>
     <div class="pokedex mt-2 custom_height">
         <div class="custom_container mx-auto h-full">
-            <div class="wrapper flex bg-red-400 justify-between p-4 gap-3 h-full">
+            <div class="wrapper flex bg-red-500 justify-between p-4 gap-3 h-full">
                 <div class="pokedex_left w-1/2 border border-black p-3">
-                    <SearchBar @searchPokemon="fetchPokemon()" />
+                    <SearchBar @searchPokemon="fetchPokemon()" @catchPok="catchPokemon()" />
                     <Details :pokemon="store.pokemon" />
                 </div>
                 <div class="pokedex_right w-1/2 border border-black p-3">
-                    <PokemonList />
+                    <PokemonList :pokemonList="store.pokemonList" />
                 </div>
             </div>
         </div>
@@ -59,6 +59,12 @@ export default {
                     })
             }
             store.searchInput = ''
+        },
+        catchPokemon() {
+            if (Object.keys(store.pokemon).length > 0) {
+                store.pokemonList.push(store.pokemon)
+            }
+            console.log('pokemon pushato')
         }
     },
     created() {
@@ -74,6 +80,6 @@ export default {
 }
 
 .custom_height {
-    height: 562px;
+    height: 590px;
 }
 </style>
