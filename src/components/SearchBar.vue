@@ -1,5 +1,5 @@
 <template>
-    <div class="search_bar flex items-center gap-4 h-8">
+    <div class="search_bar flex items-center gap-4 h-8 justify-between">
         <input class="pl-1 rounded-md h-full" type="text" v-model="store.searchInput"
             @keyup.enter="$emit('searchPokemon')">
         <button @click="$emit('searchPokemon')"
@@ -11,12 +11,12 @@
             </svg>
         </button>
 
-        <button v-if="objIsNotEmpty(store.pokemon) && store.showPokemon" class="bg-green-300 px-2 rounded-md h-full"
+        <button v-if="objIsNotEmpty(store.pokemon) && store.showPokemon" class="bg-green-400 px-2 rounded-md h-full"
             @click="$emit('catchPok')">
             Catch it!
         </button>
         <button v-else-if="store.showSelectedPokemon" @click="$emit('remPok')"
-            class="bg-red-300 px-2 rounded-md h-full">
+            class="bg-green-400 px-2 rounded-md h-full">
             Release
         </button>
     </div>

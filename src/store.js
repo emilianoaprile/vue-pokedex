@@ -6,4 +6,6 @@ export const store = reactive({
   showPokemon: false,
   showSelectedPokemon: false,
   selectedPokemon: null,
+  notFound: false,
+  caught: false,
 })

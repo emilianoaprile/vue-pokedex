@@ -1,12 +1,14 @@
 <template>
     <div class="pokedex mt-2 custom_height">
         <div class="custom_container mx-auto h-full">
-            <div class="wrapper flex bg-red-500 justify-between p-4 gap-3 h-full">
-                <div class="pokedex_left w-1/2 border border-black p-3">
+            <div class="wrapper flex bg-red-500 justify-between p-4 gap-3 h-full rounded-xl">
+                <div class="pokedex_left w-1/2 border border-black p-3 rounded-lg">
                     <SearchBar @searchPokemon="fetchPokemon()" @catchPok="catchPokemon()" @remPok="removePokemon()" />
                     <Details :pokemon="store.pokemon" :selectedPokemon="store.selectedPokemon" />
+                    <ErrorNotFound v-if="store.notFound" />
+                    <AlreadyCaught v-if="store.caught" />
                 </div>
-                <div class="pokedex_right w-1/2 border border-black p-8 overflow-y-auto">
+                <div class="pokedex_right w-1/2 border border-black overflow-y-auto rounded-lg bg-white">
                     <PokemonList :pokemonList="store.pokemonList" @pokemonInfo="onclickCardPokemon" />
                 </div>
             </div>
@@ -18,13 +20,17 @@
 import SearchBar from './SearchBar.vue';
 import Details from './Details.vue';
 import PokemonList from './PokemonList.vue';
+import ErrorNotFound from './ErrorNotFound.vue';
+import AlreadyCaught from './AlreadyCaught.vue';
 import { store } from '../store'
 import axios from 'axios'
 export default {
     components: {
         SearchBar,
         Details,
-        PokemonList
+        PokemonList,
+        ErrorNotFound,
+        AlreadyCaught
     },
     data() {
         return {
@@ -54,11 +60,19 @@ export default {
                         }
                         console.log(store.pokemon)
                         store.showPokemon = true
-
+                        store.notFound = false
+                        store.caught = false
                     })
                     .catch(err => {
                         console.log('Pokemon non trovato', err)
                         store.showPokemon = false
+                        store.notFound = true
+                        if (store.caught) {
+                            store.caught = false
+                        }
+                        if (store.showSelectedPokemon) {
+                            store.showSelectedPokemon = false
+                        }
                     })
             }
             store.searchInput = ''
@@ -72,6 +86,9 @@ export default {
                     // console.log(`${store.pokemon.general_info.name} aggiunto al pokedex`)
                 } else {
                     // console.log(`${store.pokemon.general_info.name} è già stato catturato`)
+                    store.caught = true
+                    store.showPokemon = false
+
                 }
             }
             store.showPokemon = false
@@ -88,6 +105,9 @@ export default {
         onclickCardPokemon(pokemon) {
             store.selectedPokemon = pokemon
             store.showSelectedPokemon = true
+            if (store.notFound) {
+                store.notFound = false
+            }
             console.log('click sulla carda del pokemon')
         }
     }
