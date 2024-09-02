@@ -1,7 +1,9 @@
 <template>
-    <div class="search_bar flex items-center gap-4">
-        <input class="pl-1" type="text" v-model="store.searchInput" @keyup.enter="$emit('searchPokemon')">
-        <button @click="$emit('searchPokemon')" class="bg-white flex justify-center items-center rounded-lg p-2">
+    <div class="search_bar flex items-center gap-4 h-8">
+        <input class="pl-1 rounded-md h-full" type="text" v-model="store.searchInput"
+            @keyup.enter="$emit('searchPokemon')">
+        <button @click="$emit('searchPokemon')"
+            class="bg-white flex justify-center items-center rounded-lg h-full aspect-square">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -9,7 +11,8 @@
             </svg>
         </button>
 
-        <button v-if="objIsNotEmpty(store.pokemon)" class="bg-red-300 px-2 rounded-md" @click="$emit('catchPok')">
+        <button v-if="objIsNotEmpty(store.pokemon)" class="bg-red-300 px-2 rounded-md h-full"
+            @click="$emit('catchPok')">
             Catch it!
         </button>
     </div>

@@ -6,7 +6,7 @@
                     <SearchBar @searchPokemon="fetchPokemon()" @catchPok="catchPokemon()" />
                     <Details :pokemon="store.pokemon" />
                 </div>
-                <div class="pokedex_right w-1/2 border border-black p-3">
+                <div class="pokedex_right w-1/2 border border-black p-8 overflow-y-auto">
                     <PokemonList :pokemonList="store.pokemonList" />
                 </div>
             </div>
@@ -62,7 +62,14 @@ export default {
         },
         catchPokemon() {
             if (Object.keys(store.pokemon).length > 0) {
-                store.pokemonList.push(store.pokemon)
+                // pokemon già catturato
+                const caught = store.pokemonList.some(curr => curr.id === store.pokemon.id)
+                if (!caught) {
+                    store.pokemonList.push(store.pokemon)
+                    console.log(`${store.pokemon.general_info.name} aggiunto al pokedex`)
+                } else {
+                    console.log(`${store.pokemon.general_info.name} è già stato catturato`)
+                }
             }
             console.log('pokemon pushato')
         }
