@@ -1,5 +1,5 @@
 <template>
-    <section v-if="pokemon && store.showPokemon" class="details flex flex-col items-center m-t gap-3">
+    <section v-if="pokemon && store.showPokemon" class="details flex flex-col items-center m-t gap-3 font-embed">
         <div class="pokemon_img mt-8 border-8 border-slate-300 bg-white w-60 h-30 flex justify-center rounded-lg">
             <img v-if="pokemon.general_info" :src="pokemon.general_info.images.img_front" alt="" class="w-1/2">
             <img v-else src="/img/pokeball.png" alt="" class="w-1/2">
@@ -25,7 +25,7 @@
         </div>
     </section>
     <section v-else-if="selectedPokemon && store.showSelectedPokemon"
-        class="details flex flex-col items-center m-t gap-3">
+        class="details flex flex-col items-center m-t gap-3 font-embed">
         <div class="pokemon_img mt-8 border-8 border-slate-300 bg-white w-60 h-30 flex justify-center rounded-lg">
             <img v-if="selectedPokemon.general_info" :src="selectedPokemon.general_info.images.img_front" alt=""
                 class="w-1/2">
@@ -51,7 +51,7 @@
             </div>
         </div>
     </section>
-    <div v-else class="flex flex-col items-center m-t gap-3">
+    <div v-else class="flex flex-col items-center m-t gap-3 font-embed">
         <div class="pokemon_img mt-8 border-8 border-slate-300 bg-white w-60 h-30 flex justify-center rounded-lg">
             <img src="/img/pokeball.png" alt="" class="w-1/2">
         </div>

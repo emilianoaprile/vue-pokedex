@@ -1,15 +1,18 @@
 <template>
-    <div class="pokedex mt-2 custom_height">
-        <div class="custom_container mx-auto h-full">
-            <div class="wrapper flex bg-red-500 justify-between p-4 gap-3 h-full rounded-xl">
-                <div class="pokedex_left w-1/2 border border-black p-3 rounded-lg">
-                    <SearchBar @searchPokemon="fetchPokemon()" @catchPok="catchPokemon()" @remPok="removePokemon()" />
-                    <Details :pokemon="store.pokemon" :selectedPokemon="store.selectedPokemon" />
-                    <ErrorNotFound v-if="store.notFound" />
-                    <AlreadyCaught v-if="store.caught" />
-                </div>
-                <div class="pokedex_right w-1/2 border border-black overflow-y-auto rounded-lg bg-white">
-                    <PokemonList :pokemonList="store.pokemonList" @pokemonInfo="onclickCardPokemon" />
+    <div class="h-screen flex items-center justify-center bg-green-700 font-main">
+        <div class="pokedex custom_height">
+            <div class="custom_container mx-auto h-full">
+                <div class="wrapper flex bg-red-500 justify-between p-4 gap-3 h-full rounded-xl">
+                    <div class="pokedex_left w-1/2 border border-black p-3 rounded-lg">
+                        <SearchBar @searchPokemon="fetchPokemon()" @catchPok="catchPokemon()"
+                            @remPok="removePokemon()" />
+                        <Details :pokemon="store.pokemon" :selectedPokemon="store.selectedPokemon" />
+                        <ErrorNotFound v-if="store.notFound" />
+                        <AlreadyCaught v-if="store.caught" />
+                    </div>
+                    <div class="pokedex_right w-1/2 border border-black overflow-y-auto rounded-lg bg-white">
+                        <PokemonList :pokemonList="store.pokemonList" @pokemonInfo="onclickCardPokemon" />
+                    </div>
                 </div>
             </div>
         </div>

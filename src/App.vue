@@ -11,4 +11,4 @@ export default {
   <Pokedex />
 </template>
 
-<style scoped></style>
+<style></style>
