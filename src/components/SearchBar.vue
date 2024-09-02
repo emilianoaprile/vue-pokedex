@@ -11,9 +11,13 @@
             </svg>
         </button>
 
-        <button v-if="objIsNotEmpty(store.pokemon)" class="bg-red-300 px-2 rounded-md h-full"
+        <button v-if="objIsNotEmpty(store.pokemon) && store.showPokemon" class="bg-green-300 px-2 rounded-md h-full"
             @click="$emit('catchPok')">
             Catch it!
+        </button>
+        <button v-else-if="store.showSelectedPokemon" @click="$emit('remPok')"
+            class="bg-red-300 px-2 rounded-md h-full">
+            Release
         </button>
     </div>
 </template>
@@ -29,7 +33,8 @@ export default {
     methods: {
         objIsNotEmpty(obj) {
             return Object.keys(obj).length === 0 ? false : true
-        }
+        },
+
     }
 }
 </script>

@@ -3,11 +3,11 @@
         <div class="custom_container mx-auto h-full">
             <div class="wrapper flex bg-red-500 justify-between p-4 gap-3 h-full">
                 <div class="pokedex_left w-1/2 border border-black p-3">
-                    <SearchBar @searchPokemon="fetchPokemon()" @catchPok="catchPokemon()" />
-                    <Details :pokemon="store.pokemon" />
+                    <SearchBar @searchPokemon="fetchPokemon()" @catchPok="catchPokemon()" @remPok="removePokemon()" />
+                    <Details :pokemon="store.pokemon" :selectedPokemon="store.selectedPokemon" />
                 </div>
                 <div class="pokedex_right w-1/2 border border-black p-8 overflow-y-auto">
-                    <PokemonList :pokemonList="store.pokemonList" />
+                    <PokemonList :pokemonList="store.pokemonList" @pokemonInfo="onclickCardPokemon" />
                 </div>
             </div>
         </div>
@@ -53,9 +53,12 @@ export default {
                             stats: c.stats
                         }
                         console.log(store.pokemon)
+                        store.showPokemon = true
+
                     })
                     .catch(err => {
                         console.log('Pokemon non trovato', err)
+                        store.showPokemon = false
                     })
             }
             store.searchInput = ''
@@ -66,16 +69,27 @@ export default {
                 const caught = store.pokemonList.some(curr => curr.id === store.pokemon.id)
                 if (!caught) {
                     store.pokemonList.push(store.pokemon)
-                    console.log(`${store.pokemon.general_info.name} aggiunto al pokedex`)
+                    // console.log(`${store.pokemon.general_info.name} aggiunto al pokedex`)
                 } else {
-                    console.log(`${store.pokemon.general_info.name} è già stato catturato`)
+                    // console.log(`${store.pokemon.general_info.name} è già stato catturato`)
                 }
             }
+            store.showPokemon = false
+            store.showSelectedPokemon = false
             console.log('pokemon pushato')
+        },
+        removePokemon() {
+            const pClicked = store.pokemonList.find(curr => curr.id === store.selectedPokemon.id)
+            const pIndex = store.pokemonList.indexOf(pClicked)
+            store.pokemonList.splice(pIndex, 1)
+            store.showSelectedPokemon = false
+            console.log('pokemon rimosso')
+        },
+        onclickCardPokemon(pokemon) {
+            store.selectedPokemon = pokemon
+            store.showSelectedPokemon = true
+            console.log('click sulla carda del pokemon')
         }
-    },
-    created() {
-        this.fetchPokemon()
     }
 
 }
