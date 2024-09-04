@@ -81,30 +81,36 @@ export default {
             store.searchInput = ''
         },
         catchPokemon() {
-            if (Object.keys(store.pokemon).length > 0) {
-                // pokemon già catturato
-                const caught = store.pokemonList.some(curr => curr.id === store.pokemon.id)
-                if (!caught) {
-                    store.pokemonList.push(store.pokemon)
-                    // console.log(`${store.pokemon.general_info.name} aggiunto al pokedex`)
-                } else {
-                    // console.log(`${store.pokemon.general_info.name} è già stato catturato`)
-                    store.caught = true
-                    store.showPokemon = false
-
-                }
-            }
-            store.showPokemon = false
-            store.showSelectedPokemon = false
-            console.log('pokemon pushato')
+            store.catchPokemon(store.pokemon)
         },
         removePokemon() {
-            const pClicked = store.pokemonList.find(curr => curr.id === store.selectedPokemon.id)
-            const pIndex = store.pokemonList.indexOf(pClicked)
-            store.pokemonList.splice(pIndex, 1)
-            store.showSelectedPokemon = false
-            console.log('pokemon rimosso')
+            store.removePokemon(store.selectedPokemon)
         },
+        // catchPokemon() {
+        //     if (Object.keys(store.pokemon).length > 0) {
+        //         // pokemon già catturato
+        //         const caught = store.pokemonList.some(curr => curr.id === store.pokemon.id)
+        //         if (!caught) {
+        //             store.pokemonList.push(store.pokemon)
+        //             // console.log(`${store.pokemon.general_info.name} aggiunto al pokedex`)
+        //         } else {
+        //             // console.log(`${store.pokemon.general_info.name} è già stato catturato`)
+        //             store.caught = true
+        //             store.showPokemon = false
+
+        //         }
+        //     }
+        //     store.showPokemon = false
+        //     store.showSelectedPokemon = false
+        //     console.log('pokemon pushato')
+        // },
+        // removePokemon() {
+        //     const pClicked = store.pokemonList.find(curr => curr.id === store.selectedPokemon.id)
+        //     const pIndex = store.pokemonList.indexOf(pClicked)
+        //     store.pokemonList.splice(pIndex, 1)
+        //     store.showSelectedPokemon = false
+        //     console.log('pokemon rimosso')
+        // },
         onclickCardPokemon(pokemon) {
             store.selectedPokemon = pokemon
             store.showSelectedPokemon = true
