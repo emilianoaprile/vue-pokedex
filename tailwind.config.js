@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        main: ['Tiny5', 'sans-serif'],
+        main: ['Handjet', 'sans-serif'],
       },
     },
   },

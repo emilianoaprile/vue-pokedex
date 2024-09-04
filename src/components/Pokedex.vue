@@ -1,6 +1,11 @@
 <template>
-    <div class="h-screen flex items-center justify-center bg-green-700 font-main">
-        <div class="pokedex custom_height">
+    <div
+        class="h-screen flex items-center justify-center bg-[url(/img/_de914c8b-2f9f-43c4-b6c1-bcedbb1bb41f.jpeg)] flex-col gap-4 bg-center relative">
+        <div class="relative z-10">
+            <img class="title w-60" src="/img/poklogo.png" alt="">
+        </div>
+        <div class="absolute inset-0 bg-black opacity-75 z-0"></div>
+        <div class="pokedex custom_height z-10 relative">
             <div class="custom_container mx-auto h-full">
                 <div class="wrapper flex bg-red-500 justify-between p-4 gap-3 h-full rounded-xl">
                     <div class="pokedex_left w-1/2 border border-black p-3 rounded-lg">
@@ -42,6 +47,7 @@ export default {
     },
     methods: {
         fetchPokemon() {
+            store.searchInput = store.searchInput.toLowerCase().trim()
             if (store.searchInput.length > 0) {
                 axios
                     .get(`https://pokeapi.co/api/v2/pokemon/${store.searchInput}/`)
