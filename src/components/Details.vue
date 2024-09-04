@@ -6,7 +6,6 @@
         </div>
         <div v-if="pokemon.general_info" class="info self-start bg-green-400 w-full p-2 rounded-lg">
             <div class="general_info">
-                <h1 class="text-lg font-bold">General Info:</h1>
                 <ul>
                     <li><strong>Name:</strong> {{ pokemon.general_info.name }}</li>
                     <li><strong>Type:</strong> {{ pokemon.general_info.type }}</li>
@@ -14,11 +13,14 @@
                     <li><strong>Weight:</strong> {{ pokemon.general_info.weight }} lbs</li>
                 </ul>
             </div>
-            <div v-if="pokemon.stats" class="stats">
-                <h1 class="text-lg font-bold">Stats:</h1>
+            <div v-if="pokemon.stats" class="stats mt-4">
                 <ul>
-                    <li v-for="stat in pokemon.stats">
-                        <span><strong>{{ stat.stat.name }}:</strong> </span>{{ stat.base_stat }}
+                    <li v-for="stat in pokemon.stats" class="w-full flex gap-2 items-center">
+                        <div class="w-[40%]"><strong>{{ stat.stat.name }}</strong> </div>
+                        <div class="w-[60%] bg-slate-200 h-1">
+                            <div class="bg-black h-1" :style="{ width: stat.base_stat + 'px' }">
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -41,11 +43,14 @@
                     <li><strong>Weight:</strong> {{ selectedPokemon.general_info.weight }} lbs</li>
                 </ul>
             </div>
-            <div v-if="selectedPokemon.stats" class="stats">
-                <h1 class="text-lg font-bold">Stats:</h1>
+            <div v-if="selectedPokemon.stats" class="stats mt-4">
                 <ul>
-                    <li v-for="stat in selectedPokemon.stats">
-                        <span><strong>{{ stat.stat.name }}:</strong> </span>{{ stat.base_stat }}
+                    <li v-for="stat in selectedPokemon.stats" class="w-full flex gap-2 items-center">
+                        <div class="w-[40%]"><strong>{{ stat.stat.name }}</strong> </div>
+                        <div class="w-[60%] bg-slate-200 h-1">
+                            <div class="bg-black h-1" :style="{ width: stat.base_stat + 'px' }">
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -76,7 +81,6 @@ export default {
             store,
         }
     },
-
 }
 </script>
 
